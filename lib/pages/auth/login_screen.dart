@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:borhanudiincollege/pages/addmission_form.dart';
 import 'package:borhanudiincollege/pages/auth/sign_up_screen.dart';
 import 'package:borhanudiincollege/pages/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -321,7 +322,7 @@ class _LoginScreenState extends State<LoginScreen> {
           .showSnackBar(SnackBar(content: Text('Logged In SuccessFully')));
       Navigator.of(context).pop();
       Navigator.of(context1).push(MaterialPageRoute(
-        builder: (context1) => HomePage(),
+        builder: (context1) => AddmissionFormScreen(),
       ));
     } on FirebaseAuthException catch (e) {
       await ScaffoldMessenger.of(context)

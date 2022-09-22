@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:borhanudiincollege/pages/addmission_form.dart';
 import 'package:borhanudiincollege/pages/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -37,7 +38,11 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => AddmissionFormScreen(),
+                  ));
+                },
                 child: const Card(
                   child: ListTile(
                     title: Text('Addmission'),
