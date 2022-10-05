@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:borhanudiincollege/pages/addmission_form.dart';
 import 'package:borhanudiincollege/pages/auth/login_screen.dart';
+import 'package:borhanudiincollege/pages/choose_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -40,7 +41,7 @@ class _HomePageState extends State<HomePage> {
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => AddmissionFormScreen(),
+                    builder: (context) => ChooseScreen(),
                   ));
                 },
                 child: const Card(

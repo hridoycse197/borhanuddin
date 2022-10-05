@@ -1,4 +1,6 @@
+import 'package:borhanudiincollege/pages/addmission_form.dart';
 import 'package:borhanudiincollege/pages/auth/login_screen.dart';
+import 'package:borhanudiincollege/pages/choose_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +26,9 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
-            home: LoginScreen(),
+            home: AddmissionFormScreen(
+              title: 'string',
+            ),
           );
         });
   }

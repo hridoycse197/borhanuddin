@@ -7,27 +7,291 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddmissionFormScreen extends StatefulWidget {
-  const AddmissionFormScreen({super.key});
+  String title;
+  AddmissionFormScreen({super.key, required this.title});
 
   @override
   State<AddmissionFormScreen> createState() => _AddmissionFormScreenState();
 }
 
 class _AddmissionFormScreenState extends State<AddmissionFormScreen> {
-  final _formKey = GlobalKey<FormState>();
   TextEditingController _shikkhaborsho1 = TextEditingController();
   TextEditingController _shikkhaborsho2 = TextEditingController();
   FocusNode phoneNumberFocusNode = FocusNode();
+  int sscBoardSelected = 0;
+  int sscPassingYearselected = 0;
+  int hscBoardSelected = 0;
+  int hscPassingYearselected = 0;
+  List<String> sscBoard = [
+    'Barisal',
+    'Chittagong',
+    'Cumilla',
+    'Dhaka',
+    'Dinajpur',
+    'Jessore',
+    'Mymensingh',
+    'Rajshahi',
+    'Sylhet',
+    'Madrasah',
+    'BTEB',
+    'Bou'
+  ];
+  List<String> passingYear = ['2017', '2018', '2019', '2020', '2021'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(widget.title),
+      ),
       backgroundColor: Colors.greenAccent,
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Form(
-          key: _formKey,
-          child: ListView(
+        child: PageView(children: [
+          SizedBox(
+            height: 500,
+            child: Column(children: [
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: Image.asset(
+                  "assets/images/Shaikh_Burhanuddin_Post_Graduate_College_logo.jpeg",
+                  width: 1000.h,
+                  height: 500.w,
+                ),
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  'SSC',
+                  style: TextStyle(
+                      color: Color(0xFF0070BB),
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              fullrows(
+                textInputType: TextInputType.text,
+                hints: "Roll",
+                textEditingController: Constab().sscRoll,
+                validator: (String? value) {
+                  if (value!.isEmpty) {
+                    return 'Roll is Required';
+                  }
+                },
+                title: 'Roll',
+              ),
+              fullrows(
+                textInputType: TextInputType.text,
+                hints: "Reg",
+                textEditingController: Constab().sscReg,
+                validator: (String? value) {
+                  if (value!.isEmpty) {
+                    return "Reg is Required";
+                  }
+                },
+                title: 'Reg',
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              titleWidget(text: 'Ssc Board'),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Color(0xFF0070BB),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(5)),
+                  height: 50,
+                  child: DropdownButton(
+                    hint: Text(sscBoard[sscBoardSelected]),
+                    menuMaxHeight: 200,
+                    alignment: AlignmentDirectional.centerEnd,
+                    isExpanded: true,
+                    items: sscBoard
+                        .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        sscBoardSelected =
+                            sscBoard.indexWhere((element) => element == value);
+                      });
+                    },
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              titleWidget(text: 'Passing Year'),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Color(0xFF0070BB),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(5)),
+                  height: 50,
+                  child: DropdownButton(
+                    hint: Text(passingYear[sscPassingYearselected]),
+                    menuMaxHeight: 200,
+                    alignment: AlignmentDirectional.centerEnd,
+                    isExpanded: true,
+                    items: passingYear
+                        .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        sscPassingYearselected = passingYear
+                            .indexWhere((element) => element == value);
+                      });
+                    },
+                  ),
+                ),
+              )
+            ]),
+          ),
+
+//hsc
+
+          SizedBox(
+            height: 500,
+            child: Column(children: [
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: Image.asset(
+                  "assets/images/Shaikh_Burhanuddin_Post_Graduate_College_logo.jpeg",
+                  width: 1000.h,
+                  height: 500.w,
+                ),
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  'HSC',
+                  style: TextStyle(
+                      color: Color(0xFF0070BB),
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              fullrows(
+                textInputType: TextInputType.text,
+                hints: "Roll",
+                textEditingController: Constab().hscRoll,
+                validator: (String? value) {
+                  if (value!.isEmpty) {
+                    return 'Roll is Required';
+                  }
+                },
+                title: 'Roll',
+              ),
+              fullrows(
+                textInputType: TextInputType.text,
+                hints: "Reg",
+                textEditingController: Constab().hscReg,
+                validator: (String? value) {
+                  if (value!.isEmpty) {
+                    return "Reg is Required";
+                  }
+                },
+                title: 'Reg',
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              titleWidget(text: 'Hsc Board'),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Color(0xFF0070BB),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(5)),
+                  height: 50,
+                  child: DropdownButton(
+                    hint: Text(sscBoard[hscBoardSelected]),
+                    menuMaxHeight: 200,
+                    alignment: AlignmentDirectional.centerEnd,
+                    isExpanded: true,
+                    items: sscBoard
+                        .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        hscBoardSelected =
+                            sscBoard.indexWhere((element) => element == value);
+                      });
+                    },
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              titleWidget(text: 'Passing Year'),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Color(0xFF0070BB),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(5)),
+                  height: 50,
+                  child: DropdownButton(
+                    hint: Text(passingYear[hscPassingYearselected]),
+                    menuMaxHeight: 200,
+                    alignment: AlignmentDirectional.centerEnd,
+                    isExpanded: true,
+                    items: passingYear
+                        .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        hscPassingYearselected = passingYear
+                            .indexWhere((element) => element == value);
+                      });
+                    },
+                  ),
+                ),
+              )
+            ]),
+          ),
+
+          ListView(
             children: [
               SizedBox(
                 height: 20,
@@ -79,11 +343,8 @@ class _AddmissionFormScreenState extends State<AddmissionFormScreen> {
                 height: 10,
               ),
               titleWidget(text: 'Date Of Birth'),
-              Container(height: 40,decoration: BoxDecoration(border:BoxBorder(b OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                  borderSide:
-                      const BorderSide(color: Color(0xFF0070BB), width: 4.0),
-                ),),),
+              Container(
+                  height: 40, decoration: BoxDecoration(border: Border.all())),
               fullrows(
                 textInputType: TextInputType.text,
                 hints: "Enter Your Father's Name In English",
@@ -188,7 +449,7 @@ class _AddmissionFormScreenState extends State<AddmissionFormScreen> {
               ),
             ],
           ),
-        ),
+        ]),
       )),
     );
   }
